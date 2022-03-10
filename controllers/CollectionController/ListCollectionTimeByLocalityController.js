@@ -9,8 +9,10 @@ const StatusCode = require('../../commons/constant/StatusCode');
 const findCollectionTimeByLocality = async (req, res) => {
     const locality = req.query.locality;
     validateQueryParams(res, locality);
-    const collection = await Collection.findCollectionTimeByLocality(locality);
-    validateCollectionData(res, collection);
+    if (locality != undefined) {
+        const collection = await Collection.findCollectionTimeByLocality(locality);
+        validateCollectionData(res, collection);
+    }
 }
 
 const validateQueryParams = (res, locality) => {

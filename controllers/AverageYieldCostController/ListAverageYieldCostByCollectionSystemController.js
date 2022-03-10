@@ -9,8 +9,10 @@ const StatusCode = require('../../commons/constant/StatusCode');
 const findAverageYieldCostByCollectionSystem = async (req, res) => {
     const collectionSystem = req.query.collectionsystem;
     validateQueryParams(res, collectionSystem);
-    const averageYieldCost = await AverageYieldCost.findAverageYieldCostByCollectionSystem(collectionSystem);
-    validateAverageYieldCostData(res, averageYieldCost);
+    if (collectionSystem != undefined) {
+        const averageYieldCost = await AverageYieldCost.findAverageYieldCostByCollectionSystem(parseInt(collectionSystem));
+        validateAverageYieldCostData(res, averageYieldCost);
+    }
 }
 
 const validateQueryParams = (res, collectionSystem) => {
